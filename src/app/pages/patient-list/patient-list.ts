@@ -1,8 +1,7 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -12,7 +11,7 @@ import { SearchService } from '../../services/search.service';
   styleUrl: './patient-list.css',
 })
 export class PatientList {
-  searchService = inject(SearchService);
+  searchQuery = signal('');
 
   patients = [
     {
@@ -51,7 +50,7 @@ export class PatientList {
   ];
 
   filteredPatients = computed(() => {
-    const query = this.searchService.query().toLowerCase();
+    const query = this.searchQuery().toLowerCase();
     if (!query) return this.patients;
     return this.patients.filter(p => 
       p.name.toLowerCase().includes(query) || 
