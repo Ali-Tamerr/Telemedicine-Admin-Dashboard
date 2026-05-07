@@ -1,0 +1,45 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-[#134e4a]">Dashboard Overview</h1>
+      <p class="text-sm text-gray-500 mt-1">Welcome back, Dr. Jenkins. Here's what's happening today.</p>
+    </div>
+    <button class="flex items-center gap-2 px-4 py-2 bg-[#0891b2] text-white rounded-lg hover:bg-[#067a96] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0891b2]">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      New Consultation
+    </button>
+  </div>
+
+  <!-- Stats Cards -->
+  <app-patient-stats-card></app-patient-stats-card>
+
+  <!-- Main Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Column (Calendar + Activity) -->
+    <div class="lg:col-span-2 space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
+        <h2 class="text-lg font-semibold text-[#134e4a] mb-4">Today's Appointments</h2>
+        <app-appointment-calendar></app-appointment-calendar>
+      </div>
+      
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
+        <h2 class="text-lg font-semibold text-[#134e4a] mb-4">Live Patient Vitals (Telemetry)</h2>
+        <app-vital-signs-chart></app-vital-signs-chart>
+      </div>
+    </div>
+
+    <!-- Right Column (Activity Feed) -->
+    <div class="space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50 h-full">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-[#134e4a]">Recent Activity</h2>
+          <button class="text-sm text-[#0891b2] hover:text-[#067a96] font-medium">View All</button>
+        </div>
+        <app-recent-activity-feed></app-recent-activity-feed>
+      </div>
+    </div>
+  </div>
+</div>
