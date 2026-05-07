@@ -1,13 +1,13 @@
-<div class="flex h-screen bg-[#f0fdfa] text-[#134e4a] font-sans antialiased">
+<div class="flex h-screen bg-bg text-text font-sans antialiased">
   <!-- Sidebar -->
-  <app-sidebar class="hidden md:flex flex-col w-64 bg-white border-r border-teal-100 shadow-sm z-50"></app-sidebar>
+  <app-sidebar class="hidden md:flex flex-col w-64 bg-sidebar-bg border-r border-border shadow-sm z-50"></app-sidebar>
 
   <div class="flex flex-col flex-1 overflow-hidden relative z-0">
     <!-- Topbar -->
-    <app-topbar class="flex items-center justify-between h-16 bg-white border-b border-teal-100 shadow-sm px-6 z-40"></app-topbar>
+    <app-topbar class="flex items-center justify-between h-16 bg-topbar-bg border-b border-border shadow-sm px-6 z-40"></app-topbar>
 
     <!-- Main Content -->
-    <main class="flex-1 overflow-y-auto p-6">
+    <main class="flex-1 overflow-y-auto p-6 bg-bg">
       <router-outlet></router-outlet>
     </main>
   </div>

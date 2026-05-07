@@ -65,7 +65,10 @@ export class VitalSignsChart implements AfterViewInit, OnDestroy {
             min: 50,
             max: 110,
             grid: {
-              color: '#f1f5f9'
+              color: 'rgba(148, 163, 184, 0.1)' // Soft slate color for both modes
+            },
+            ticks: {
+              color: '#94a3b8' // Slate-400
             },
             border: {
               dash: [4, 4]

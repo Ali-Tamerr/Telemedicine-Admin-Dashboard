@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from './layout/sidebar/sidebar';
 import { Topbar } from './layout/topbar/topbar';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,11 @@ import { Topbar } from './layout/topbar/topbar';
   imports: [RouterOutlet, Sidebar, Topbar],
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('anglularTest');
+  themeService = inject(ThemeService);
+
+  ngOnInit() {
+    this.themeService.applyTheme();
+  }
 }

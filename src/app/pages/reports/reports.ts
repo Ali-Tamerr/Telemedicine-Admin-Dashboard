@@ -50,12 +50,18 @@ export class Reports implements AfterViewInit {
             beginAtZero: true,
             grid: {
               display: true,
-              color: 'rgba(0, 0, 0, 0.05)'
+              color: 'rgba(148, 163, 184, 0.1)'
+            },
+            ticks: {
+              color: '#94a3b8'
             }
           },
           x: {
             grid: {
               display: false
+            },
+            ticks: {
+              color: '#94a3b8'
             }
           }
         }
@@ -91,7 +97,8 @@ export class Reports implements AfterViewInit {
             position: 'bottom',
             labels: {
               padding: 20,
-              usePointStyle: true
+              usePointStyle: true,
+              color: '#94a3b8'
             }
           }
         },
