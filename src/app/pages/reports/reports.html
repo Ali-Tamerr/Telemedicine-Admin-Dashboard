@@ -1,16 +1,16 @@
 <div class="space-y-6">
   <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
     <div>
-      <h1 class="text-2xl font-bold text-[#134e4a]">Reports & Analytics</h1>
-      <p class="text-sm text-gray-500 mt-1">Hospital performance, revenue, and patient statistics.</p>
+      <h1 class="text-2xl font-bold text-text">Reports & Analytics</h1>
+      <p class="text-sm text-text-muted mt-1">Hospital performance, revenue, and patient statistics.</p>
     </div>
     <div class="flex items-center gap-3">
-      <select class="pl-3 pr-8 py-2 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] bg-white text-gray-700">
+      <select class="pl-3 pr-8 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-surface text-text transition-colors">
         <option>Last 30 Days</option>
         <option>This Quarter</option>
         <option>This Year</option>
       </select>
-      <button class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors shadow-sm font-medium">
+      <button class="flex items-center gap-2 px-4 py-2 bg-surface border border-border text-text rounded-lg hover:bg-bg/50 transition-colors shadow-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
@@ -21,11 +21,11 @@
 
   <!-- KPI Summary -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
-      <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Revenue</p>
+    <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
+      <p class="text-sm font-medium text-text-muted uppercase tracking-wider">Total Revenue</p>
       <div class="flex items-end gap-3 mt-2">
-        <h3 class="text-3xl font-bold text-[#134e4a]">$124,500</h3>
-        <span class="text-sm font-bold text-[#10b981] flex items-center mb-1">
+        <h3 class="text-3xl font-bold text-text">$124,500</h3>
+        <span class="text-sm font-bold text-accent flex items-center mb-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
           </svg>
@@ -34,11 +34,11 @@
       </div>
     </div>
     
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
-      <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">New Patients</p>
+    <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
+      <p class="text-sm font-medium text-text-muted uppercase tracking-wider">New Patients</p>
       <div class="flex items-end gap-3 mt-2">
-        <h3 class="text-3xl font-bold text-[#134e4a]">342</h3>
-        <span class="text-sm font-bold text-[#10b981] flex items-center mb-1">
+        <h3 class="text-3xl font-bold text-text">342</h3>
+        <span class="text-sm font-bold text-accent flex items-center mb-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
           </svg>
@@ -47,11 +47,11 @@
       </div>
     </div>
 
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
-      <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Avg Consultation Time</p>
+    <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
+      <p class="text-sm font-medium text-text-muted uppercase tracking-wider">Avg Consultation Time</p>
       <div class="flex items-end gap-3 mt-2">
-        <h3 class="text-3xl font-bold text-[#134e4a]">18<span class="text-lg text-gray-400 ml-1">min</span></h3>
-        <span class="text-sm font-bold text-[#ef4444] flex items-center mb-1">
+        <h3 class="text-3xl font-bold text-text">18<span class="text-lg text-text-muted ml-1">min</span></h3>
+        <span class="text-sm font-bold text-danger flex items-center mb-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-0.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M12 13a1 1 0 100 2h5a1 1 0 001-1V9a1 1 0 10-2 0v2.586l-4.293-4.293a1 1 0 00-1.414 0L8 9.586l-4.293-4.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0L11 9.414 14.586 13H12z" clip-rule="evenodd" />
           </svg>
@@ -63,15 +63,15 @@
 
   <!-- Charts Area -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
-      <h2 class="text-lg font-semibold text-[#134e4a] mb-6">Revenue Growth</h2>
+    <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
+      <h2 class="text-lg font-semibold text-text mb-6">Revenue Growth</h2>
       <div class="h-64 relative">
         <canvas id="revenueChart"></canvas>
       </div>
     </div>
 
-    <div class="bg-white p-6 rounded-xl shadow-sm border border-teal-50">
-      <h2 class="text-lg font-semibold text-[#134e4a] mb-6">Consultations by Department</h2>
+    <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
+      <h2 class="text-lg font-semibold text-text mb-6">Consultations by Department</h2>
       <div class="h-64 relative">
         <canvas id="departmentChart"></canvas>
       </div>

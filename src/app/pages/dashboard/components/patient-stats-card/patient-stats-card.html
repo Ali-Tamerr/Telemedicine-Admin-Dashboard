@@ -1,11 +1,11 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
   <!-- Total Patients -->
-  <div class="bg-surface p-3 rounded-xl shadow-sm border border-card-border flex items-center justify-between">
+  <div class="bg-surface p-3 rounded-xl shadow-sm border border-border flex items-center justify-between">
     <div>
       <p class="text-xs font-medium text-text-muted">Total Patients</p>
       <div class="flex items-baseline gap-1 mt-0.5">
         <h3 class="text-lg font-bold text-text">1,248</h3>
-        <span class="text-xs font-medium text-[#10b981] flex items-center">
+        <span class="text-xs font-medium text-accent flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-0.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd" />
           </svg>
@@ -13,7 +13,7 @@
         </span>
       </div>
     </div>
-    <div class="w-12 h-12 rounded-full bg-[#0891b2] text-white flex items-center justify-center">
+    <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
       </svg>
@@ -21,18 +21,18 @@
   </div>
 
   <!-- Active Consultations -->
-  <div class="bg-surface p-3 rounded-xl shadow-sm border border-card-border flex items-center justify-between">
+  <div class="bg-surface p-3 rounded-xl shadow-sm border border-border flex items-center justify-between">
     <div>
       <p class="text-xs font-medium text-text-muted">Active Consultations</p>
       <div class="flex items-baseline gap-1 mt-0.5">
         <h3 class="text-lg font-bold text-text">4</h3>
-        <span class="text-xs font-medium text-gray-500">Right now</span>
+        <span class="text-xs font-medium text-text-muted">Right now</span>
       </div>
     </div>
-    <div class="w-12 h-12 rounded-full bg-[#ef4444] text-white flex items-center justify-center relative">
+    <div class="w-12 h-12 rounded-full bg-danger text-white flex items-center justify-center relative">
       <span class="absolute top-0 right-0 flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-danger opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-danger-dark border border-white/20"></span>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -41,17 +41,17 @@
   </div>
 
   <!-- Upcoming Today -->
-  <div class="bg-surface p-3 rounded-xl shadow-sm border border-card-border flex items-center justify-between">
+  <div class="bg-surface p-3 rounded-xl shadow-sm border border-border flex items-center justify-between">
     <div>
       <p class="text-xs font-medium text-text-muted">Upcoming Today</p>
       <div class="flex items-baseline gap-1 mt-0.5">
         <h3 class="text-lg font-bold text-text">18</h3>
-        <span class="text-xs font-medium text-[#f59e0b] flex items-center">
+        <span class="text-xs font-medium text-warning flex items-center">
           Pending
         </span>
       </div>
     </div>
-    <div class="w-12 h-12 rounded-full bg-[#f59e0b] text-white flex items-center justify-center">
+    <div class="w-12 h-12 rounded-full bg-warning text-white flex items-center justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
@@ -59,17 +59,17 @@
   </div>
 
   <!-- Completed -->
-  <div class="bg-surface p-3 rounded-xl shadow-sm border border-card-border flex items-center justify-between">
+  <div class="bg-surface p-3 rounded-xl shadow-sm border border-border flex items-center justify-between">
     <div>
       <p class="text-xs font-medium text-text-muted">Completed</p>
       <div class="flex items-baseline gap-1 mt-0.5">
         <h3 class="text-lg font-bold text-text">12</h3>
-        <span class="text-xs font-medium text-[#10b981] flex items-center">
+        <span class="text-xs font-medium text-accent flex items-center">
           Today
         </span>
       </div>
     </div>
-    <div class="w-12 h-12 rounded-full bg-[#10b981] text-white flex items-center justify-center">
+    <div class="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>

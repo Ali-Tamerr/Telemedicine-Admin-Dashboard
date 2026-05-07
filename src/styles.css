@@ -7,6 +7,7 @@
   --color-secondary: #22d3ee;
   --color-accent: #10b981;
   --color-danger: #ef4444;
+  --color-danger-dark: #dc2626;
   --color-warning: #f59e0b;
   
   --color-bg: #f0fdfa;
@@ -36,6 +37,7 @@
   --color-card-border: #334155;
   --color-sidebar-bg: #0f172a;
   --color-topbar-bg: #0f172a;
+  --color-danger-dark: #b91c1c;
   color-scheme: dark;
 }
 
@@ -52,8 +54,4 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
 
-/* Accessibility Focus States */
-*:focus-visible {
-  outline: 3px solid var(--color-primary);
-  outline-offset: 2px;
-}
+

@@ -1,9 +1,35 @@
 <!-- Search -->
-<div class="flex items-center bg-bg/50 px-3 py-2 rounded-lg w-full max-w-md focus-within:ring-2 focus-within:ring-primary transition-all border border-border">
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-  </svg>
-  <input type="text" placeholder="Search patients, appointments..." class="bg-transparent border-none focus:outline-none ml-2 w-full text-sm text-text placeholder:text-text-muted" />
+<div class="relative w-full max-w-md">
+  <div class="flex items-center bg-bg/50 px-3 py-2 rounded-lg focus-within:ring-2 focus-within:ring-primary transition-all border border-border">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <input 
+      type="text" 
+      [(ngModel)]="searchQuery"
+      placeholder="Search patients, appointments..." 
+      class="bg-transparent border-none outline-none focus:outline-none ml-2 w-full text-sm text-text placeholder:text-text-muted shadow-none ring-0 focus:ring-0" 
+    />
+  </div>
+
+  <!-- Search Results Dropdown -->
+  @if (filteredResults().length > 0) {
+    <div class="absolute left-0 right-0 mt-2 bg-surface border border-border rounded-xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+      <div class="p-2">
+        @for (result of filteredResults(); track result.name) {
+          <div class="flex items-center gap-3 p-3 hover:bg-bg/50 rounded-lg cursor-pointer group transition-colors">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+              {{ result.type[0] }}
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm font-bold text-text group-hover:text-primary transition-colors">{{ result.name }}</span>
+              <span class="text-[10px] text-text-muted">{{ result.type }} • {{ result.detail }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 </div>
 
 <!-- Actions -->
@@ -20,12 +46,44 @@
     }
   </button>
 
-  <button class="relative p-2 text-text-muted hover:text-primary transition-colors rounded-full hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-    </svg>
-    <span class="absolute top-1.5 right-1.5 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white"></span>
-  </button>
+  <div class="relative">
+    <button (click)="toggleNotifications()" class="relative p-2 text-text-muted hover:text-primary transition-colors rounded-full hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      </svg>
+      <span class="absolute top-2 right-2 w-2.5 h-2.5 bg-danger border-2 border-topbar-bg rounded-full"></span>
+    </button>
+
+    <!-- Notifications Dropdown -->
+    @if (showNotifications()) {
+      <div class="absolute right-0 mt-2 w-80 bg-surface border border-border rounded-xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+        <div class="p-4 border-b border-border flex items-center justify-between bg-bg/50">
+          <h3 class="font-bold text-text">Notifications</h3>
+          <span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">2 New</span>
+        </div>
+        <div class="max-h-96 overflow-y-auto">
+          @for (note of notifications; track note.id) {
+            <div class="p-4 border-b border-border/50 hover:bg-bg/30 transition-colors cursor-pointer group">
+              <div class="flex justify-between items-start mb-1">
+                <span class="text-sm font-bold text-text group-hover:text-primary transition-colors">{{ note.title }}</span>
+                <span class="text-[10px] text-text-muted">{{ note.time }}</span>
+              </div>
+              <p class="text-xs text-text-secondary leading-relaxed">{{ note.message }}</p>
+              @if (note.unread) {
+                <div class="mt-2 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                  <span class="text-[10px] text-primary font-medium">New</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+        <div class="p-3 text-center bg-bg/50 border-t border-border">
+          <button class="text-xs font-bold text-primary hover:underline">Mark all as read</button>
+        </div>
+      </div>
+    }
+  </div>
   
   <div class="flex items-center gap-3 border-l border-border pl-4">
     <div class="text-right hidden sm:block">
