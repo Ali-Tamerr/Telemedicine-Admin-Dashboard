@@ -9,6 +9,7 @@ import { Chart, ChartConfiguration } from 'chart.js/auto';
   styleUrl: './vital-signs-chart.css',
 })
 export class VitalSignsChart implements AfterViewInit, OnDestroy {
+  @ViewChild('vitalsChart') vitalsChartRef!: ElementRef<HTMLCanvasElement>;
   public chart: Chart | undefined;
   private intervalId: any;
 
@@ -21,7 +22,7 @@ export class VitalSignsChart implements AfterViewInit, OnDestroy {
   }
 
   initChart() {
-    const canvas = document.getElementById('vitalsChart') as HTMLCanvasElement;
+    const canvas = this.vitalsChartRef.nativeElement;
     if (!canvas) return;
 
     // Initial dummy data
