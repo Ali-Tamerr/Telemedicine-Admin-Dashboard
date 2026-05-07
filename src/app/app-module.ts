@@ -1,6 +1,7 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -21,9 +22,6 @@ import { Settings } from './pages/settings/settings';
 
 @NgModule({
   declarations: [
-    App,
-    Sidebar,
-    Topbar,
     Dashboard,
     PatientStatsCard,
     AppointmentCalendar,
@@ -37,8 +35,21 @@ import { Settings } from './pages/settings/settings';
     Reports,
     Settings,
   ],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule, RouterModule, ReactiveFormsModule],
+  exports: [
+    Dashboard,
+    PatientStatsCard,
+    AppointmentCalendar,
+    RecentActivityFeed,
+    VitalSignsChart,
+    PatientList,
+    PatientDetails,
+    PatientAdd,
+    Appointments,
+    Teleconsultation,
+    Reports,
+    Settings,
+  ],
   providers: [provideBrowserGlobalErrorListeners(), provideClientHydration(withEventReplay())],
-  bootstrap: [App],
 })
 export class AppModule {}
