@@ -23,7 +23,8 @@
         </span>
         <input 
           type="text" 
-          [(ngModel)]="searchQuery"
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event)"
           placeholder="Search by name, email or ID..." 
           class="block w-full pl-10 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text placeholder:text-text-muted"
         >
