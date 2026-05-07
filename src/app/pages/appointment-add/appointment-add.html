@@ -1,0 +1,70 @@
+<div class="space-y-6">
+  <div class="flex items-center gap-4">
+    <button (click)="onCancel()" class="p-2 hover:bg-bg/50 rounded-full transition-colors text-text-muted">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+      </svg>
+    </button>
+    <div>
+      <h1 class="text-2xl font-bold text-text">Book New Appointment</h1>
+      <p class="text-sm text-text-muted">Schedule a consultation for a patient.</p>
+    </div>
+  </div>
+
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()" class="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
+    <div class="p-6 space-y-8">
+      <div>
+        <h2 class="text-lg font-semibold text-primary border-b border-border pb-2 mb-4">Appointment Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Patient Name -->
+          <div class="space-y-1">
+            <label class="text-sm font-medium text-text-secondary">Patient Name <span class="text-danger">*</span></label>
+            <input type="text" formControlName="patientName" placeholder="Search patient name..." class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="appointmentForm.get('patientName')?.touched && appointmentForm.get('patientName')?.invalid">
+            <p *ngIf="appointmentForm.get('patientName')?.touched && appointmentForm.get('patientName')?.invalid" class="text-xs text-danger mt-1">Patient name is required.</p>
+          </div>
+
+          <!-- Appointment Type -->
+          <div class="space-y-1">
+            <label class="text-sm font-medium text-text-secondary">Appointment Type <span class="text-danger">*</span></label>
+            <select formControlName="appointmentType" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text" [class.border-danger]="appointmentForm.get('appointmentType')?.touched && appointmentForm.get('appointmentType')?.invalid">
+              <option value="">Select Type</option>
+              <option value="routine">Routine Checkup</option>
+              <option value="urgent">Urgent Consultation</option>
+              <option value="follow-up">Follow-up Visit</option>
+            </select>
+          </div>
+
+          <!-- Date -->
+          <div class="space-y-1">
+            <label class="text-sm font-medium text-text-secondary">Preferred Date <span class="text-danger">*</span></label>
+            <input type="date" formControlName="date" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text" [class.border-danger]="appointmentForm.get('date')?.touched && appointmentForm.get('date')?.invalid">
+          </div>
+
+          <!-- Time -->
+          <div class="space-y-1">
+            <label class="text-sm font-medium text-text-secondary">Preferred Time <span class="text-danger">*</span></label>
+            <input type="time" formControlName="time" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text" [class.border-danger]="appointmentForm.get('time')?.touched && appointmentForm.get('time')?.invalid">
+          </div>
+
+          <!-- Notes -->
+          <div class="md:col-span-2 space-y-1">
+            <label class="text-sm font-medium text-text-secondary">Additional Notes</label>
+            <textarea formControlName="notes" rows="3" placeholder="Symptoms, reason for visit, etc." class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="bg-bg/30 px-6 py-4 flex items-center justify-end gap-3 border-t border-border">
+      <button type="button" (click)="onCancel()" class="px-6 py-2.5 text-sm font-medium text-text-secondary hover:text-text transition-colors">Cancel</button>
+      <button type="submit" [disabled]="isSubmitting" class="px-8 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm flex items-center gap-2">
+        <svg *ngIf="isSubmitting" class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        {{ isSubmitting ? 'Booking...' : 'Confirm Appointment' }}
+      </button>
+    </div>
+  </form>
+</div>

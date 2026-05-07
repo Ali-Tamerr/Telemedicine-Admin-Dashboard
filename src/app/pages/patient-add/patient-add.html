@@ -1,49 +1,49 @@
 <div class="space-y-6">
   <div class="flex items-center gap-4">
-    <button (click)="onCancel()" class="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
+    <button (click)="onCancel()" class="p-2 hover:bg-bg/50 rounded-full transition-colors text-text-muted">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
     </button>
     <div>
-      <h1 class="text-2xl font-bold text-[#134e4a]">Register New Patient</h1>
-      <p class="text-sm text-gray-500">Enter patient personal and medical information.</p>
+      <h1 class="text-2xl font-bold text-text">Register New Patient</h1>
+      <p class="text-sm text-text-muted">Enter patient personal and medical information.</p>
     </div>
   </div>
 
-  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-sm border border-teal-50 overflow-hidden">
+  <form [formGroup]="patientForm" (ngSubmit)="onSubmit()" class="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
     <div class="p-6 space-y-8">
       <!-- Personal Information Section -->
       <div>
-        <h2 class="text-lg font-semibold text-[#134e4a] border-b border-gray-100 pb-2 mb-4">Personal Information</h2>
+        <h2 class="text-lg font-semibold text-primary border-b border-border pb-2 mb-4">Personal Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">First Name <span class="text-red-500">*</span></label>
-            <input type="text" formControlName="firstName" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('firstName')?.touched && patientForm.get('firstName')?.invalid">
-            <p *ngIf="patientForm.get('firstName')?.touched && patientForm.get('firstName')?.invalid" class="text-xs text-red-500 mt-1">First name is required (min 2 chars).</p>
+            <label class="text-sm font-medium text-text-secondary">First Name <span class="text-danger">*</span></label>
+            <input type="text" formControlName="firstName" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('firstName')?.touched && patientForm.get('firstName')?.invalid">
+            <p *ngIf="patientForm.get('firstName')?.touched && patientForm.get('firstName')?.invalid" class="text-xs text-danger mt-1">First name is required (min 2 chars).</p>
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Last Name <span class="text-red-500">*</span></label>
-            <input type="text" formControlName="lastName" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('lastName')?.touched && patientForm.get('lastName')?.invalid">
-            <p *ngIf="patientForm.get('lastName')?.touched && patientForm.get('lastName')?.invalid" class="text-xs text-red-500 mt-1">Last name is required.</p>
+            <label class="text-sm font-medium text-text-secondary">Last Name <span class="text-danger">*</span></label>
+            <input type="text" formControlName="lastName" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('lastName')?.touched && patientForm.get('lastName')?.invalid">
+            <p *ngIf="patientForm.get('lastName')?.touched && patientForm.get('lastName')?.invalid" class="text-xs text-danger mt-1">Last name is required.</p>
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Email Address <span class="text-red-500">*</span></label>
-            <input type="email" formControlName="email" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('email')?.touched && patientForm.get('email')?.invalid">
-            <p *ngIf="patientForm.get('email')?.touched && patientForm.get('email')?.invalid" class="text-xs text-red-500 mt-1">Valid email is required.</p>
+            <label class="text-sm font-medium text-text-secondary">Email Address <span class="text-danger">*</span></label>
+            <input type="email" formControlName="email" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('email')?.touched && patientForm.get('email')?.invalid">
+            <p *ngIf="patientForm.get('email')?.touched && patientForm.get('email')?.invalid" class="text-xs text-danger mt-1">Valid email is required.</p>
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Phone Number <span class="text-red-500">*</span></label>
-            <input type="text" formControlName="phone" placeholder="+1 (555) 000-0000" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('phone')?.touched && patientForm.get('phone')?.invalid">
-            <p *ngIf="patientForm.get('phone')?.touched && patientForm.get('phone')?.invalid" class="text-xs text-red-500 mt-1">Valid phone number is required.</p>
+            <label class="text-sm font-medium text-text-secondary">Phone Number <span class="text-danger">*</span></label>
+            <input type="text" formControlName="phone" placeholder="+1 (555) 000-0000" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('phone')?.touched && patientForm.get('phone')?.invalid">
+            <p *ngIf="patientForm.get('phone')?.touched && patientForm.get('phone')?.invalid" class="text-xs text-danger mt-1">Valid phone number is required.</p>
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Date of Birth <span class="text-red-500">*</span></label>
-            <input type="date" formControlName="dob" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('dob')?.touched && patientForm.get('dob')?.invalid">
+            <label class="text-sm font-medium text-text-secondary">Date of Birth <span class="text-danger">*</span></label>
+            <input type="date" formControlName="dob" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text" [class.border-danger]="patientForm.get('dob')?.touched && patientForm.get('dob')?.invalid">
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Gender <span class="text-red-500">*</span></label>
-            <select formControlName="gender" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all bg-white" [class.border-red-500]="patientForm.get('gender')?.touched && patientForm.get('gender')?.invalid">
+            <label class="text-sm font-medium text-text-secondary">Gender <span class="text-danger">*</span></label>
+            <select formControlName="gender" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text" [class.border-danger]="patientForm.get('gender')?.touched && patientForm.get('gender')?.invalid">
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -55,11 +55,11 @@
 
       <!-- Medical Information Section -->
       <div>
-        <h2 class="text-lg font-semibold text-[#134e4a] border-b border-gray-100 pb-2 mb-4">Medical Information</h2>
+        <h2 class="text-lg font-semibold text-primary border-b border-border pb-2 mb-4">Medical Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Blood Type</label>
-            <select formControlName="bloodType" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all bg-white">
+            <label class="text-sm font-medium text-text-secondary">Blood Type</label>
+            <select formControlName="bloodType" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text">
               <option value="">Select Blood Type</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -72,25 +72,25 @@
             </select>
           </div>
           <div class="space-y-1">
-            <label class="text-sm font-medium text-gray-700">Emergency Contact <span class="text-red-500">*</span></label>
-            <input type="text" formControlName="emergencyContact" placeholder="Name and Phone" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('emergencyContact')?.touched && patientForm.get('emergencyContact')?.invalid">
+            <label class="text-sm font-medium text-text-secondary">Emergency Contact <span class="text-danger">*</span></label>
+            <input type="text" formControlName="emergencyContact" placeholder="Name and Phone" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('emergencyContact')?.touched && patientForm.get('emergencyContact')?.invalid">
           </div>
           <div class="md:col-span-2 space-y-1">
-            <label class="text-sm font-medium text-gray-700">Residential Address <span class="text-red-500">*</span></label>
-            <textarea formControlName="address" rows="2" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all" [class.border-red-500]="patientForm.get('address')?.touched && patientForm.get('address')?.invalid"></textarea>
+            <label class="text-sm font-medium text-text-secondary">Residential Address <span class="text-danger">*</span></label>
+            <textarea formControlName="address" rows="2" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted" [class.border-danger]="patientForm.get('address')?.touched && patientForm.get('address')?.invalid"></textarea>
           </div>
           <div class="md:col-span-2 space-y-1">
-            <label class="text-sm font-medium text-gray-700">Known Allergies</label>
-            <textarea formControlName="allergies" rows="2" placeholder="List any allergies or type 'None'" class="block w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-[#0891b2] focus:border-[#0891b2] transition-all"></textarea>
+            <label class="text-sm font-medium text-text-secondary">Known Allergies</label>
+            <textarea formControlName="allergies" rows="2" placeholder="List any allergies or type 'None'" class="block w-full px-4 py-2.5 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary transition-all bg-bg/50 text-text placeholder:text-text-muted"></textarea>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Form Actions -->
-    <div class="bg-gray-50 px-6 py-4 flex items-center justify-end gap-3 border-t border-gray-100">
-      <button type="button" (click)="onCancel()" class="px-6 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-800 transition-colors">Cancel</button>
-      <button type="submit" [disabled]="isSubmitting" class="px-8 py-2.5 bg-[#0891b2] text-white rounded-lg text-sm font-semibold hover:bg-[#067a96] transition-all shadow-sm flex items-center gap-2">
+    <div class="bg-bg/30 px-6 py-4 flex items-center justify-end gap-3 border-t border-border">
+      <button type="button" (click)="onCancel()" class="px-6 py-2.5 text-sm font-medium text-text-secondary hover:text-text transition-colors">Cancel</button>
+      <button type="submit" [disabled]="isSubmitting" class="px-8 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm flex items-center gap-2">
         <svg *ngIf="isSubmitting" class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
