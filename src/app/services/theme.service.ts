@@ -13,6 +13,7 @@ export class ThemeService {
   }
 
   applyTheme() {
+    console.log('Applying theme. Dark mode:', this.isDarkMode());
     if (this.isDarkMode()) {
       document.documentElement.classList.add('dark');
     } else {

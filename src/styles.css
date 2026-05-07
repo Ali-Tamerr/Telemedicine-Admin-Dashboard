@@ -23,7 +23,10 @@
   --font-body: 'Noto Sans', sans-serif;
 }
 
-@theme dark {
+/* Force dark mode to be class-based */
+@variant dark (&:where(.dark, .dark *));
+
+.dark {
   --color-bg: #020617;
   --color-text: #f1f5f9;
   --color-text-muted: #94a3b8;
@@ -33,6 +36,7 @@
   --color-card-border: #334155;
   --color-sidebar-bg: #0f172a;
   --color-topbar-bg: #0f172a;
+  color-scheme: dark;
 }
 
 body {
