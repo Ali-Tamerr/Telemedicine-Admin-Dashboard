@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-recent-activity-feed',
-  standalone: false,
+  standalone: true,
   templateUrl: './recent-activity-feed.html',
   styleUrl: './recent-activity-feed.css',
 })

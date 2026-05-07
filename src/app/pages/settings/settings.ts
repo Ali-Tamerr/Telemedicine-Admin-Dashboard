@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-settings',
-  standalone: false,
+  standalone: true,
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })

@@ -4,7 +4,7 @@ import { Chart, ChartConfiguration } from 'chart.js/auto';
 
 @Component({
   selector: 'app-vital-signs-chart',
-  standalone: false,
+  standalone: true,
   templateUrl: './vital-signs-chart.html',
   styleUrl: './vital-signs-chart.css',
 })
