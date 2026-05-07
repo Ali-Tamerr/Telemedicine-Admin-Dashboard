@@ -21,7 +21,13 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </span>
-        <input type="text" placeholder="Search by name, email or ID..." class="block w-full pl-10 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text placeholder:text-text-muted">
+        <input 
+          type="text" 
+          [ngModel]="searchService.query()"
+          (ngModelChange)="searchService.setQuery($event)"
+          placeholder="Search by name, email or ID..." 
+          class="block w-full pl-10 pr-3 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text placeholder:text-text-muted"
+        >
       </div>
       
       <div class="flex items-center gap-2 w-full md:w-auto">
@@ -54,79 +60,57 @@
           </tr>
         </thead>
         <tbody class="bg-surface divide-y divide-border">
-          <!-- Row 1 -->
-          <tr class="hover:bg-primary/5 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">JD</div>
-                <div class="ml-4">
-                  <div class="text-sm font-semibold text-text">Jane Doe</div>
-                  <div class="text-xs text-text-muted">jane.doe@example.com</div>
+          @for (patient of filteredPatients(); track patient.id) {
+            <tr class="hover:bg-primary/5 transition-colors animate-in fade-in duration-300">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="h-10 w-10 rounded-full flex items-center justify-center font-bold" [ngClass]="patient.colorClass">
+                    {{ patient.initials }}
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-semibold text-text">{{ patient.name }}</div>
+                    <div class="text-xs text-text-muted">{{ patient.email }}</div>
+                  </div>
                 </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">#P-0042</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">28 / Female</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">May 12, 2026</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-500">Active</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button class="text-primary hover:text-primary/80 mr-3">View</button>
-              <button class="text-text-muted hover:text-text-secondary">Edit</button>
-            </td>
-          </tr>
-          <!-- Row 2 -->
-          <tr class="hover:bg-primary/5 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="h-10 w-10 rounded-full bg-warning/10 text-warning flex items-center justify-center font-bold">BS</div>
-                <div class="ml-4">
-                  <div class="text-sm font-semibold text-text">Bob Smith</div>
-                  <div class="text-xs text-text-muted">bob.smith@example.com</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">{{ patient.id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">{{ patient.age }} / {{ patient.gender }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">{{ patient.lastVisit }}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                  [ngClass]="{
+                    'bg-green-500/10 text-green-500': patient.status === 'Active',
+                    'bg-warning/10 text-warning': patient.status === 'Pending',
+                    'bg-danger/10 text-danger': patient.status === 'Critical'
+                  }">
+                  {{ patient.status }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <button class="text-primary hover:text-primary/80 mr-3 transition-colors">View</button>
+                <button class="text-text-muted hover:text-text-secondary transition-colors">Edit</button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="px-6 py-12 text-center">
+                <div class="flex flex-col items-center justify-center text-text-muted">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <p class="text-lg font-medium">No patients found</p>
+                  <p class="text-sm">Try adjusting your search query</p>
                 </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">#P-0085</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">45 / Male</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">May 10, 2026</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning/10 text-warning">Pending</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button class="text-primary hover:text-primary/80 mr-3">View</button>
-              <button class="text-text-muted hover:text-text-secondary">Edit</button>
-            </td>
-          </tr>
-          <!-- Row 3 -->
-          <tr class="hover:bg-primary/5 transition-colors">
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="h-10 w-10 rounded-full bg-danger/10 text-danger flex items-center justify-center font-bold">RT</div>
-                <div class="ml-4">
-                  <div class="text-sm font-semibold text-text">Robert Taylor</div>
-                  <div class="text-xs text-text-muted">robert.t@example.com</div>
-                </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">#P-0122</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">62 / Male</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">May 08, 2026</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger/10 text-danger">Critical</span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-              <button class="text-primary hover:text-primary/80 mr-3">View</button>
-              <button class="text-text-muted hover:text-text-secondary">Edit</button>
-            </td>
-          </tr>
+              </td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>
 
     <!-- Pagination -->
     <div class="p-4 border-t border-border flex items-center justify-between bg-surface">
-      <div class="text-sm text-text-muted">Showing 1 to 3 of 124 patients</div>
+      <div class="text-sm text-text-muted">Showing {{ filteredPatients().length }} of 124 patients</div>
       <div class="flex gap-2">
         <button class="px-3 py-1 border border-border rounded text-sm disabled:opacity-50 text-text-muted" disabled>Previous</button>
         <button class="px-3 py-1 border border-primary bg-primary text-white rounded text-sm">1</button>

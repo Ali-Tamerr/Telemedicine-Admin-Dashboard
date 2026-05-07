@@ -1,6 +1,7 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { LayoutService } from '../../services/layout.service';
+import { SearchService } from '../../services/search.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,8 +15,11 @@ import { FormsModule } from '@angular/forms';
 export class Topbar {
   themeService = inject(ThemeService);
   layoutService = inject(LayoutService);
+  searchService = inject(SearchService);
   showNotifications = signal(false);
-  searchQuery = signal('');
+
+  get searchQuery() { return this.searchService.query(); }
+  set searchQuery(val: string) { this.searchService.setQuery(val); }
 
   notifications = [
     { id: 1, title: 'New Appointment', message: 'Michael Brown scheduled for 2:00 PM', time: '5m ago', unread: true },
