@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Sidebar {
   private router = inject(Router);
+  layoutService = inject(LayoutService);
 
   testNavigate(path: string, event: Event) {
     event.preventDefault();

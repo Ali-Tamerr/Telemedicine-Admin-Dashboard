@@ -1,5 +1,6 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
+import { LayoutService } from '../../services/layout.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Topbar {
   themeService = inject(ThemeService);
+  layoutService = inject(LayoutService);
   showNotifications = signal(false);
   searchQuery = signal('');
 
