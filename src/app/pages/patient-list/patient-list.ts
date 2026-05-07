@@ -1,12 +1,13 @@
 import { Component, inject, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-patient-list',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './patient-list.html',
   styleUrl: './patient-list.css',
 })

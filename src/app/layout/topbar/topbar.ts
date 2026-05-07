@@ -38,7 +38,7 @@ export class Topbar {
   ];
 
   filteredResults = computed(() => {
-    const query = this.searchQuery().toLowerCase();
+    const query = this.searchQuery.toLowerCase();
     if (!query || query.length < 2) return [];
     return this.searchableItems.filter(item => 
       item.name.toLowerCase().includes(query) || 
