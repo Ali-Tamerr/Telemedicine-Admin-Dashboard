@@ -1,9 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './settings.html',
   styleUrl: './settings.css',
 })
-export class Settings {}
+export class Settings {
+  activeTab = signal('profile');
+
+  setActiveTab(tab: string) {
+    this.activeTab.set(tab);
+  }
+}
