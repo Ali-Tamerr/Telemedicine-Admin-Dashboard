@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { PatientStatsCard } from '../dashboard/components/patient-stats-card/patient-stats-card';
 import { AppointmentCalendar } from '../dashboard/components/appointment-calendar/appointment-calendar';
 import { RecentActivityFeed } from '../dashboard/components/recent-activity-feed/recent-activity-feed';
@@ -19,4 +19,14 @@ import { CommonModule } from '@angular/common';
   templateUrl: './dashboard-v2.html',
   styleUrl: './dashboard-v2.css',
 })
-export class DashboardV2 {}
+export class DashboardV2 {
+  showActivityModal = signal(false);
+
+  openActivityModal() {
+    this.showActivityModal.set(true);
+  }
+
+  closeActivityModal() {
+    this.showActivityModal.set(false);
+  }
+}
