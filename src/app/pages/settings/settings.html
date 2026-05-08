@@ -65,7 +65,7 @@
           
           <div class="flex items-center gap-6 mb-8">
             <div class="h-20 w-20 rounded-full bg-secondary text-white flex items-center justify-center text-2xl font-bold shadow-md">
-              SJ
+              {{ userService.firstName().charAt(0) }}{{ userService.lastName().charAt(0) }}
             </div>
             <div>
               <button class="px-4 py-2 border border-border rounded-lg text-sm font-medium text-text hover:bg-bg/50 transition-colors">Change Photo</button>
@@ -76,19 +76,19 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div class="space-y-1">
               <label class="text-sm font-medium text-text-secondary">First Name</label>
-              <input type="text" value="Sarah" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
+              <input type="text" [(ngModel)]="editFirstName" name="firstName" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
             </div>
             <div class="space-y-1">
               <label class="text-sm font-medium text-text-secondary">Last Name</label>
-              <input type="text" value="Jenkins" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
+              <input type="text" [(ngModel)]="editLastName" name="lastName" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
             </div>
             <div class="space-y-1 sm:col-span-2">
               <label class="text-sm font-medium text-text-secondary">Email Address</label>
-              <input type="email" value="sarah.jenkins@telemed.com" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
+              <input type="email" [(ngModel)]="editEmail" name="email" class="block w-full px-4 py-2 border border-border rounded-lg text-sm focus:ring-primary focus:border-primary bg-bg/50 text-text">
             </div>
             <div class="space-y-1 sm:col-span-2">
               <label class="text-sm font-medium text-text-secondary">Role / Designation</label>
-              <input type="text" value="Chief Medical Officer" disabled class="block w-full px-4 py-2 border border-border bg-bg/30 text-text-muted rounded-lg text-sm cursor-not-allowed">
+              <input type="text" [value]="userService.role()" disabled class="block w-full px-4 py-2 border border-border bg-bg/30 text-text-muted rounded-lg text-sm cursor-not-allowed">
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@
 
       <div class="pt-6 border-t border-border flex justify-end gap-3">
         <button class="px-5 py-2.5 text-sm font-medium text-text-muted hover:bg-bg/50 rounded-lg transition-colors">Discard</button>
-        <button class="px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm">Save Changes</button>
+        <button (click)="saveChanges()" class="px-6 py-2.5 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm">Save Changes</button>
       </div>
     </div>
   </div>

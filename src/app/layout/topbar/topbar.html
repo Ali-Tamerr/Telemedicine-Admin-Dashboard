@@ -62,11 +62,11 @@
   
   <div class="flex items-center gap-3 border-l border-border pl-4">
     <div class="text-right hidden sm:block">
-      <div class="text-sm font-semibold text-text">Dr. Sarah Jenkins</div>
-      <div class="text-xs text-text-muted">Chief Medical Officer</div>
+      <div class="text-sm font-semibold text-text">Dr. {{ userService.firstName() }} {{ userService.lastName() }}</div>
+      <div class="text-xs text-text-muted">{{ userService.role() }}</div>
     </div>
     <div class="h-10 w-10 rounded-full bg-secondary flex items-center justify-center text-white font-bold shadow-sm">
-      SJ
+      {{ userService.firstName().charAt(0) }}{{ userService.lastName().charAt(0) }}
     </div>
   </div>
 </div>
