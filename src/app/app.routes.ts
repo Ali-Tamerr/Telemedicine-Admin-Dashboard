@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Dashboard } from './pages/dashboard/dashboard';
+import { DashboardV2 } from './pages/dashboard-v2/dashboard-v2';
 import { PatientList } from './pages/patient-list/patient-list';
 import { PatientDetails } from './pages/patient-details/patient-details';
 import { PatientAdd } from './pages/patient-add/patient-add';
@@ -11,7 +11,7 @@ import { Settings } from './pages/settings/settings';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: Dashboard },
+  { path: 'dashboard', component: DashboardV2 },
   { path: 'patients', component: PatientList },
   { path: 'patients/add', component: PatientAdd },
   { path: 'patients/:id', component: PatientDetails },

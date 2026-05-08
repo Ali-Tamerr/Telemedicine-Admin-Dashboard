@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PatientStatsCard } from './components/patient-stats-card/patient-stats-card';
 import { AppointmentCalendar } from './components/appointment-calendar/appointment-calendar';
 import { RecentActivityFeed } from './components/recent-activity-feed/recent-activity-feed';
-import { VitalSignsChart } from './components/vital-signs-chart/vital-signs-chart';
+import { AnalyticsChart } from './components/analytics-chart/analytics-chart';
 
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
     PatientStatsCard,
     AppointmentCalendar,
     RecentActivityFeed,
-    VitalSignsChart
+    AnalyticsChart
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',

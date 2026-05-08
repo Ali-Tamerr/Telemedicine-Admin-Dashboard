@@ -8,12 +8,12 @@ describe('PatientList', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PatientList],
+      imports: [PatientList],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PatientList);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
