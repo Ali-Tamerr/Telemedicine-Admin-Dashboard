@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class PatientList {
   searchQuery = signal('');
+  selectedPatient = signal<any>(null);
+  showViewModal = signal(false);
 
   patients = [
     {
@@ -23,7 +25,9 @@ export class PatientList {
       lastVisit: 'May 12, 2026',
       status: 'Active',
       initials: 'JD',
-      colorClass: 'bg-primary/10 text-primary'
+      colorClass: 'bg-primary/10 text-primary',
+      phone: '+1 (555) 012-3456',
+      address: '123 Medical Dr, Springfield, IL'
     },
     {
       id: '#P-0085',
@@ -34,7 +38,9 @@ export class PatientList {
       lastVisit: 'May 10, 2026',
       status: 'Pending',
       initials: 'BS',
-      colorClass: 'bg-warning/10 text-warning'
+      colorClass: 'bg-warning/10 text-warning',
+      phone: '+1 (555) 987-6543',
+      address: '456 Healthcare Ln, Metropolis, NY'
     },
     {
       id: '#P-0122',
@@ -45,7 +51,9 @@ export class PatientList {
       lastVisit: 'May 08, 2026',
       status: 'Critical',
       initials: 'RT',
-      colorClass: 'bg-danger/10 text-danger'
+      colorClass: 'bg-danger/10 text-danger',
+      phone: '+1 (555) 444-5555',
+      address: '789 Wellness Way, Gotham, NJ'
     }
   ];
 
@@ -58,4 +66,14 @@ export class PatientList {
       p.id.toLowerCase().includes(query)
     );
   });
+
+  viewPatient(patient: any) {
+    this.selectedPatient.set(patient);
+    this.showViewModal.set(true);
+  }
+
+  closeModal() {
+    this.showViewModal.set(false);
+    setTimeout(() => this.selectedPatient.set(null), 300);
+  }
 }
