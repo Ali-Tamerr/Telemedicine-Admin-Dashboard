@@ -1,59 +1,82 @@
-# AnglularTest
+# 🏥 MediAdmin - Telemedicine Admin Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
+![MediAdmin Banner](public/assets/images/banner.png)
 
-## Development server
+[![Angular](https://img.shields.io/badge/Angular-21.2.9-DD0031?style=for-the-badge&logo=angular)](https://angular.io/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Chart.js](https://img.shields.io/badge/Chart.js-4.5-FF6384?style=for-the-badge&logo=chartdotjs)](https://www.chartjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Deployment](https://img.shields.io/badge/Deployment-GitHub_Pages-blue?style=for-the-badge&logo=github)](https://ali-tamerr.github.io/Telemedicine-Admin-Dashboard/)
 
-To start a local development server, run:
+MediAdmin is a premium, high-performance administrative dashboard designed for telemedicine providers. It provides a centralized interface for managing patients, tracking real-time vitals, and analyzing consultation metrics with a sleek, modern UI.
 
+## ✨ Key Features
+
+- **📊 Comprehensive Dashboard**: At-a-glance overview of total patients, active consultations, and upcoming appointments.
+- **📈 Advanced Analytics**: Interactive bar charts for consultation specialization analysis and volume tracking.
+- **📅 Smart Calendar**: Dynamic weekly appointment scheduler with real-time "Today" tracking.
+- **👥 Patient Management**: Full-featured patient directory with detailed profile viewing and search capabilities.
+- **⚡ Real-time Vitals**: Live heart rate and vital signs monitoring integration (Teleconsultation module).
+- **⚙️ Profile Settings**: Reactive account management allowing users to update profile details with instant global synchronization.
+- **🌓 Adaptive Theme**: Seamless dark/light mode support for optimal viewing in any environment.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Angular 21](https://angular.io/) (Standalone Components, Signals)
+- **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
+- **Visualizations**: [Chart.js](https://www.chartjs.org/)
+- **Icons**: Lucide & Heroicons
+- **Build Tool**: Angular CLI & Vite
+- **Testing**: [Vitest](https://vitest.dev/)
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ali-Tamerr/Telemedicine-Admin-Dashboard.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd Telemedicine-Admin-Dashboard
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+   ```bash
+   npm start
+   ```
+
+Navigate to `http://localhost:4200` to view the app.
+
+## 📦 Deployment
+
+This project is configured for automated deployment to GitHub Pages.
+
+To build and deploy:
 ```bash
-ng serve
+npm run build
+npm run deploy
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📄 License
 
-## Code scaffolding
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🤝 Contributing
 
-```bash
-ng generate component component-name
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+Built with ❤️ by [Ali Tamerr](https://github.com/Ali-Tamerr)
