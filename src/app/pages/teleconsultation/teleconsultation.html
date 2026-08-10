@@ -1,97 +1,449 @@
-<div class="h-[calc(100vh-6rem)] flex flex-col -mx-6 -mt-6">
-  <!-- Telehealth Header -->
-  <div class="bg-surface border-b border-border px-6 py-4 flex justify-between items-center shrink-0">
+<div class="flex-1 flex flex-col space-y-6 min-h-0">
+  <!-- Header & Action -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 flex-shrink-0">
     <div>
-      <h1 class="text-xl font-bold text-text flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-danger animate-pulse"></span>
-        Live Consultation
+      <h1 class="text-2xl font-bold text-text flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span>
+        Virtual Consultation Center
       </h1>
-      <p class="text-sm text-text-muted mt-1">Patient: Robert Taylor | ID: #P-0122</p>
+      <p class="text-sm text-text-muted mt-1">Manage live patient queue, triage requests, and launch telemedicine rooms.</p>
     </div>
-    <div class="flex items-center gap-2 text-sm font-medium bg-danger/10 text-danger px-3 py-1.5 rounded-lg border border-danger/20">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+    <button (click)="openNewConsultationModal()" 
+      class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
       </svg>
-      14:23
+      Add Patient to Queue
+    </button>
+  </div>
+
+  <!-- Metric Summary Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-shrink-0">
+    <div class="bg-surface p-4 rounded-xl border border-border shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-warning/10 text-warning flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-text">{{ waitingCount() }}</div>
+        <div class="text-xs text-text-muted font-medium">Patients in Queue</div>
+      </div>
+    </div>
+
+    <div class="bg-surface p-4 rounded-xl border border-border shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-text">{{ inProgressCount() }}</div>
+        <div class="text-xs text-text-muted font-medium">Active Calls Right Now</div>
+      </div>
+    </div>
+
+    <div class="bg-surface p-4 rounded-xl border border-border shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-text">8.5 <span class="text-sm font-normal text-text-muted">mins</span></div>
+        <div class="text-xs text-text-muted font-medium">Avg Patient Wait Time</div>
+      </div>
+    </div>
+
+    <div class="bg-surface p-4 rounded-xl border border-border shadow-sm flex items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold text-text">{{ completedCount() }}</div>
+        <div class="text-xs text-text-muted font-medium">Completed Today</div>
+      </div>
     </div>
   </div>
 
-  <div class="flex-1 flex overflow-hidden">
-    <!-- Video Area -->
-    <div class="flex-1 bg-[#0f172a] relative p-4 flex flex-col">
-      <!-- Main Video (Patient) -->
-      <div class="flex-1 bg-black/40 rounded-xl overflow-hidden relative border border-white/10 flex items-center justify-center">
-        <div class="text-center text-white/30">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-          </svg>
-          <p>Waiting for patient video...</p>
-        </div>
-        <div class="absolute bottom-4 left-4 bg-black/50 text-white px-3 py-1 rounded-md text-sm font-medium backdrop-blur-sm">
-          Robert Taylor
-        </div>
+  <!-- Queue Container Card -->
+  <div class="bg-surface rounded-xl border border-border shadow-sm flex-1 flex flex-col min-h-0 overflow-hidden">
+    <!-- Controls Header -->
+    <div class="p-4 border-b border-border flex flex-col md:flex-row justify-between items-center gap-4 flex-shrink-0">
+      <!-- Tabs -->
+      <div class="flex bg-bg/50 p-1 rounded-lg border border-border w-full md:w-auto">
+        <button (click)="activeTab.set('all')" 
+          [class.bg-surface]="activeTab() === 'all'" 
+          [class.text-text]="activeTab() === 'all'"
+          [class.shadow-sm]="activeTab() === 'all'"
+          class="px-4 py-1.5 text-xs font-semibold rounded-md text-text-muted transition-all">
+          All Queue ({{ queueList().length }})
+        </button>
+        <button (click)="activeTab.set('waiting')" 
+          [class.bg-surface]="activeTab() === 'waiting'" 
+          [class.text-text]="activeTab() === 'waiting'"
+          [class.shadow-sm]="activeTab() === 'waiting'"
+          class="px-4 py-1.5 text-xs font-semibold rounded-md text-text-muted transition-all">
+          Waiting Queue ({{ waitingCount() }})
+        </button>
+        <button (click)="activeTab.set('in-progress')" 
+          [class.bg-surface]="activeTab() === 'in-progress'" 
+          [class.text-text]="activeTab() === 'in-progress'"
+          [class.shadow-sm]="activeTab() === 'in-progress'"
+          class="px-4 py-1.5 text-xs font-semibold rounded-md text-text-muted transition-all">
+          In Call ({{ inProgressCount() }})
+        </button>
       </div>
 
-      <!-- Self Video Thumbnail -->
-      <div class="absolute top-8 right-8 w-48 h-36 bg-gray-900 rounded-lg border-2 border-white/20 overflow-hidden shadow-lg flex items-center justify-center">
-        <div class="text-white/40 text-sm">Camera Off</div>
-      </div>
-
-      <!-- Call Controls -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-black/60 backdrop-blur-md px-6 py-3 rounded-full border border-white/10 shadow-2xl">
-        <button class="p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors focus:ring-2 focus:ring-white/30 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-          </svg>
-        </button>
-        <button class="p-3 rounded-full bg-danger/20 text-danger border border-danger/50 hover:bg-danger/30 transition-colors focus:ring-2 focus:ring-danger focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18" />
-          </svg>
-        </button>
-        <button class="p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors focus:ring-2 focus:ring-white/30 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-        </button>
-        <div class="w-px h-8 bg-white/10 mx-2"></div>
-        <button class="px-6 py-3 rounded-full bg-danger text-white font-bold tracking-wide hover:bg-danger/90 transition-colors shadow-md focus:ring-2 focus:ring-danger focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none">
-          End Call
-        </button>
+      <!-- Search -->
+      <div class="relative w-full md:w-80">
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery"
+          placeholder="Search by patient, ID, or complaint..." 
+          class="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-xs focus:ring-primary focus:border-primary bg-bg/50 text-text">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-text-muted absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
       </div>
     </div>
 
-    <!-- Side Panel -->
-    <div class="w-80 bg-surface border-l border-border flex flex-col shadow-xl">
-      <!-- Tabs -->
-      <div class="flex border-b border-border shrink-0">
-        <button class="flex-1 py-3 text-sm font-bold text-primary border-b-2 border-primary">Patient Info</button>
-        <button class="flex-1 py-3 text-sm font-medium text-text-muted hover:text-text transition-colors">Chat</button>
-        <button class="flex-1 py-3 text-sm font-medium text-text-muted hover:text-text transition-colors">Notes</button>
-      </div>
+    <!-- Queue List Grid/Table -->
+    <div class="overflow-auto flex-1 min-h-0 p-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        @for (item of filteredQueue(); track item.id) {
+          <div class="bg-bg/40 border border-border rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col justify-between space-y-4 group">
+            <!-- Patient Top Info -->
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-3">
+                <div class="h-12 w-12 rounded-full border flex items-center justify-center font-bold text-base shadow-sm" [ngClass]="item.colorClass">
+                  {{ item.initials }}
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-text group-hover:text-primary transition-colors flex items-center gap-2">
+                    {{ item.patientName }}
+                    <span class="text-xs font-medium text-text-muted">({{ item.gender }}, {{ item.age }})</span>
+                  </h3>
+                  <p class="text-xs text-text-muted">{{ item.patientId }} &bull; Assigned to {{ item.doctor }}</p>
+                </div>
+              </div>
 
-      <!-- Content -->
-      <div class="flex-1 overflow-y-auto p-4 space-y-6">
-        <div>
-          <h3 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Current Vitals</h3>
-          <app-vital-signs-chart></app-vital-signs-chart>
-        </div>
-        
-        <div class="border-t border-border pt-4">
-          <h3 class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Quick History</h3>
-          <div class="space-y-3">
-            <div class="p-3 bg-danger/10 border border-danger/20 rounded-lg">
-              <p class="text-xs font-bold text-danger">Alert: Elevated BP History</p>
-              <p class="text-xs text-danger/80 mt-1">Patient has a history of hypertensive crisis.</p>
+              <!-- Triage Badge -->
+              <span class="px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5"
+                [ngClass]="{
+                  'bg-danger/10 text-danger border border-danger/20': item.triage === 'Urgent',
+                  'bg-primary/10 text-primary border border-primary/20': item.triage === 'Routine',
+                  'bg-warning/10 text-warning border border-warning/20': item.triage === 'Follow-up'
+                }">
+                @if (item.triage === 'Urgent') {
+                  <span class="w-2 h-2 rounded-full bg-danger animate-ping"></span>
+                }
+                {{ item.triage }}
+              </span>
             </div>
-            <div class="p-3 bg-bg/50 border border-border rounded-lg">
-              <p class="text-xs font-semibold text-text">Last visit: May 08, 2026</p>
-              <p class="text-xs text-text-muted mt-1">Prescribed Lisinopril 10mg.</p>
+
+            <!-- Complaint Box -->
+            <div class="bg-surface/80 p-3 rounded-lg border border-border/60">
+              <p class="text-xs font-semibold text-text-muted uppercase tracking-wider mb-1">Chief Complaint</p>
+              <p class="text-sm font-medium text-text">{{ item.complaint }}</p>
+            </div>
+
+            <!-- Vitals Grid -->
+            <div class="grid grid-cols-4 gap-2 text-center text-xs">
+              <div class="bg-surface p-2 rounded-lg border border-border/50">
+                <span class="text-[10px] text-text-muted block font-medium">Blood Pressure</span>
+                <span class="font-bold text-text">{{ item.vitals.bp }}</span>
+              </div>
+              <div class="bg-surface p-2 rounded-lg border border-border/50">
+                <span class="text-[10px] text-text-muted block font-medium">Heart Rate</span>
+                <span class="font-bold text-text" [class.text-danger]="item.vitals.hr > 90">{{ item.vitals.hr }} BPM</span>
+              </div>
+              <div class="bg-surface p-2 rounded-lg border border-border/50">
+                <span class="text-[10px] text-text-muted block font-medium">Oxygen SpO2</span>
+                <span class="font-bold text-text">{{ item.vitals.spo2 }}</span>
+              </div>
+              <div class="bg-surface p-2 rounded-lg border border-border/50">
+                <span class="text-[10px] text-text-muted block font-medium">Temp</span>
+                <span class="font-bold text-text">{{ item.vitals.temp }}</span>
+              </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="pt-2 border-t border-border/50 flex items-center justify-between">
+              <div class="flex items-center gap-1.5 text-xs text-text-muted font-medium">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Wait time: {{ item.waitTime }}
+              </div>
+
+              <div class="flex items-center gap-2">
+                @if (item.status === 'In Progress') {
+                  <button (click)="startCall(item)" 
+                    class="px-4 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 transition-all shadow-sm flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                    Rejoin Call
+                  </button>
+                } @else {
+                  <button (click)="startCall(item)" 
+                    class="px-4 py-2 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary/90 transition-all shadow-sm flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Start Call
+                  </button>
+                }
+              </div>
             </div>
           </div>
-        </div>
+        } @empty {
+          <div class="col-span-2 py-16 text-center text-text-muted">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-3 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <p class="text-base font-semibold">No patients found in this queue</p>
+            <p class="text-xs">Adjust your search query or filter settings.</p>
+          </div>
+        }
       </div>
     </div>
   </div>
 </div>
+
+<!-- Active Telemedicine Call Modal -->
+@if (showCallModal() && selectedPatient()) {
+  <div class="fixed inset-0 bg-black/70 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
+    <div class="bg-[#0f172a] text-white w-full max-w-5xl h-[85vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-white/10">
+      <!-- Call Header -->
+      <div class="p-4 bg-slate-900 border-b border-white/10 flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="w-3 h-3 rounded-full bg-danger animate-ping"></span>
+          <div>
+            <h2 class="text-base font-bold text-white flex items-center gap-2">
+              Telemedicine Room: {{ selectedPatient()?.patientName }}
+              <span class="text-xs font-normal text-slate-400">({{ selectedPatient()?.patientId }})</span>
+            </h2>
+            <p class="text-xs text-slate-400">Chief Complaint: {{ selectedPatient()?.complaint }}</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="text-xs font-mono bg-white/10 px-3 py-1.5 rounded-lg border border-white/10">
+            Duration: {{ callDuration() }}
+          </div>
+          <button (click)="closeCallModal()" class="p-1.5 hover:bg-white/10 rounded-full text-slate-400 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Video & Panel Body -->
+      <div class="flex-1 flex overflow-hidden">
+        <!-- Video Stream View -->
+        <div class="flex-1 relative p-4 flex flex-col bg-slate-950">
+          <!-- Main Patient Video (Simulated interactive active video feed) -->
+          <div class="flex-1 bg-gradient-to-b from-slate-900 to-black rounded-xl overflow-hidden relative border border-white/10 flex flex-col items-center justify-center p-6 text-center">
+            @if (isVideoOff()) {
+              <div class="flex flex-col items-center space-y-3">
+                <div class="w-24 h-24 rounded-full bg-slate-800 border-2 border-white/20 flex items-center justify-center text-3xl font-bold text-slate-300">
+                  {{ selectedPatient()?.initials }}
+                </div>
+                <p class="text-sm font-medium text-slate-400">Patient Camera Turned Off</p>
+              </div>
+            } @else {
+              <!-- Animated Visualizer Active Stream Feed -->
+              <div class="flex flex-col items-center space-y-4">
+                <div class="relative">
+                  <div class="w-28 h-28 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-4xl font-bold text-white shadow-2xl animate-pulse">
+                    {{ selectedPatient()?.initials }}
+                  </div>
+                  <span class="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-slate-900 rounded-full"></span>
+                </div>
+                <div>
+                  <h3 class="text-lg font-bold text-white">{{ selectedPatient()?.patientName }}</h3>
+                  <p class="text-xs text-primary font-medium">Connected HD Audio & Video</p>
+                </div>
+                <!-- Audio Wave Visualizer Simulation -->
+                <div class="flex items-center gap-1.5 h-8">
+                  <span class="w-1 bg-primary h-4 rounded-full animate-bounce"></span>
+                  <span class="w-1 bg-primary h-7 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span class="w-1 bg-primary h-5 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                  <span class="w-1 bg-primary h-8 rounded-full animate-bounce [animation-delay:0.1s]"></span>
+                  <span class="w-1 bg-primary h-3 rounded-full animate-bounce [animation-delay:0.3s]"></span>
+                </div>
+              </div>
+            }
+
+            <div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/10 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500"></span>
+              Encrypted Telehealth Stream
+            </div>
+
+            <!-- Self Video Thumbnail -->
+            <div class="absolute top-4 right-4 w-40 h-28 bg-slate-900 rounded-lg border border-white/20 overflow-hidden shadow-xl flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-8 h-8 rounded-full bg-slate-800 text-xs font-bold mx-auto mb-1 flex items-center justify-center">SJ</div>
+                <span class="text-[10px] text-slate-400 font-medium">Dr. Sarah Jenkins</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Floating Controls -->
+          <div class="mt-4 flex items-center justify-center gap-4 bg-slate-900/90 backdrop-blur-md py-3 px-6 rounded-full border border-white/10 self-center shadow-xl">
+            <button (click)="toggleMute()" 
+              [class.bg-danger]="isMuted()" 
+              [class.bg-white\/10]="!isMuted()"
+              class="p-3 rounded-full text-white hover:opacity-90 transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+              </svg>
+            </button>
+            <button (click)="toggleVideo()" 
+              [class.bg-danger]="isVideoOff()" 
+              [class.bg-white\/10]="!isVideoOff()"
+              class="p-3 rounded-full text-white hover:opacity-90 transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </button>
+            <button class="px-6 py-2.5 bg-danger text-white font-bold text-xs rounded-full hover:bg-danger/90 transition-all shadow-lg" (click)="closeCallModal()">
+              End Consultation
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Consultation Panel -->
+        <div class="w-96 bg-slate-900 border-l border-white/10 flex flex-col">
+          <div class="flex border-b border-white/10 text-xs font-semibold">
+            <button (click)="activeCallTab.set('vitals')" 
+              [class.border-b-2]="activeCallTab() === 'vitals'"
+              [class.border-primary]="activeCallTab() === 'vitals'"
+              [class.text-primary]="activeCallTab() === 'vitals'"
+              [class.text-slate-400]="activeCallTab() !== 'vitals'"
+              class="flex-1 py-3 transition-colors">
+              Live Vitals
+            </button>
+            <button (click)="activeCallTab.set('chat')" 
+              [class.border-b-2]="activeCallTab() === 'chat'"
+              [class.border-primary]="activeCallTab() === 'chat'"
+              [class.text-primary]="activeCallTab() === 'chat'"
+              [class.text-slate-400]="activeCallTab() !== 'chat'"
+              class="flex-1 py-3 transition-colors">
+              In-Call Chat
+            </button>
+          </div>
+
+          <!-- Vitals Tab Content -->
+          @if (activeCallTab() === 'vitals') {
+            <div class="flex-1 overflow-y-auto p-4 space-y-6">
+              <div>
+                <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-3">Real-Time Patient Vitals</h4>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-slate-800/60 p-3 rounded-lg border border-white/5">
+                    <span class="text-[10px] text-slate-400 block font-medium">Blood Pressure</span>
+                    <span class="text-base font-bold text-white">{{ selectedPatient()?.vitals?.bp }}</span>
+                  </div>
+                  <div class="bg-slate-800/60 p-3 rounded-lg border border-white/5">
+                    <span class="text-[10px] text-slate-400 block font-medium">Heart Rate</span>
+                    <span class="text-base font-bold text-primary">{{ selectedPatient()?.vitals?.hr }} BPM</span>
+                  </div>
+                  <div class="bg-slate-800/60 p-3 rounded-lg border border-white/5">
+                    <span class="text-[10px] text-slate-400 block font-medium">Oxygen SpO2</span>
+                    <span class="text-base font-bold text-emerald-400">{{ selectedPatient()?.vitals?.spo2 }}</span>
+                  </div>
+                  <div class="bg-slate-800/60 p-3 rounded-lg border border-white/5">
+                    <span class="text-[10px] text-slate-400 block font-medium">Body Temp</span>
+                    <span class="text-base font-bold text-amber-400">{{ selectedPatient()?.vitals?.temp }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-t border-white/10 pt-4 space-y-2">
+                <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Medical History & Allergies</h4>
+                <p class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-lg border border-white/5">
+                  {{ selectedPatient()?.history }}
+                </p>
+              </div>
+            </div>
+          }
+
+          <!-- Chat Tab Content -->
+          @if (activeCallTab() === 'chat') {
+            <div class="flex-1 flex flex-col min-h-0">
+              <div class="flex-1 overflow-y-auto p-4 space-y-3">
+                @for (msg of chatMessages(); track $index) {
+                  <div [class.text-right]="msg.sender === 'Doctor'" class="space-y-1">
+                    <div class="inline-block p-2.5 rounded-lg text-xs max-w-[80%]"
+                      [ngClass]="msg.sender === 'Doctor' ? 'bg-primary text-white' : 'bg-slate-800 text-slate-200'">
+                      {{ msg.text }}
+                    </div>
+                    <span class="text-[10px] text-slate-500 block">{{ msg.sender }} &bull; {{ msg.time }}</span>
+                  </div>
+                }
+              </div>
+
+              <div class="p-3 border-t border-white/10 bg-slate-950 flex gap-2">
+                <input type="text" [(ngModel)]="newChatMessage" (keyup.enter)="sendChatMessage()"
+                  placeholder="Type message to patient..." 
+                  class="flex-1 bg-slate-800 border border-white/10 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-primary">
+                <button (click)="sendChatMessage()" class="bg-primary px-3 py-2 rounded-lg text-xs font-bold text-white hover:bg-primary/90 transition-colors">
+                  Send
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Add New Patient Intake Modal -->
+@if (showNewConsultationModal()) {
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4 animate-in fade-in duration-300">
+    <div class="bg-surface w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border border-border">
+      <div class="p-6 border-b border-border bg-bg/30 flex justify-between items-center">
+        <h2 class="text-lg font-bold text-text">New Telemedicine Intake</h2>
+        <button (click)="closeNewConsultationModal()" class="p-1.5 hover:bg-bg rounded-full text-text-muted">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-4">
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-text-secondary uppercase">Patient Full Name</label>
+          <input type="text" [(ngModel)]="newPatientName" placeholder="e.g. David Miller" 
+            class="w-full px-3 py-2 border border-border rounded-lg text-sm bg-bg/50 text-text focus:ring-primary focus:border-primary">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-text-secondary uppercase">Chief Complaint / Reason</label>
+          <textarea [(ngModel)]="newComplaint" rows="3" placeholder="Describe symptoms or reason for telemedicine visit..." 
+            class="w-full px-3 py-2 border border-border rounded-lg text-sm bg-bg/50 text-text focus:ring-primary focus:border-primary"></textarea>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-text-secondary uppercase">Triage Level</label>
+          <select [(ngModel)]="newTriage" class="w-full px-3 py-2 border border-border rounded-lg text-sm bg-bg/50 text-text focus:ring-primary focus:border-primary">
+            <option value="Routine">Routine</option>
+            <option value="Follow-up">Follow-up</option>
+            <option value="Urgent">Urgent</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-border bg-bg/30 flex justify-end gap-3">
+        <button (click)="closeNewConsultationModal()" class="px-4 py-2 text-sm font-medium text-text-muted hover:bg-bg/50 rounded-lg">Cancel</button>
+        <button (click)="addConsultationToQueue()" class="px-5 py-2 bg-primary text-white font-bold rounded-lg text-sm hover:bg-primary/90 transition-all shadow-sm">
+          Add to Queue
+        </button>
+      </div>
+    </div>
+  </div>
+}
