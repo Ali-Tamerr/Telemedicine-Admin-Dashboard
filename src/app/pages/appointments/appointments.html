@@ -1,5 +1,5 @@
-<div class="space-y-6">
-  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex-1 flex flex-col space-y-6 min-h-0">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 flex-shrink-0">
     <div>
       <h1 class="text-2xl font-bold text-text">Appointment Scheduling</h1>
       <p class="text-sm text-text-muted mt-1">Manage and schedule patient consultations.</p>
@@ -20,8 +20,8 @@
     </div>
   </div>
 
-  <div class="bg-surface p-6 rounded-xl shadow-sm border border-border">
-    <div class="flex items-center justify-between mb-6">
+  <div class="bg-surface p-6 rounded-xl shadow-sm border border-border flex-1 flex flex-col min-h-0 overflow-hidden">
+    <div class="flex items-center justify-between mb-6 flex-shrink-0">
       <h2 class="text-lg font-bold text-text flex items-center gap-2">
         <button class="p-1 hover:bg-bg/50 rounded text-text-muted transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,6 +43,6 @@
     </div>
 
     <!-- Reusing the calendar grid from dashboard for consistency -->
-    <app-appointment-calendar></app-appointment-calendar>
+    <app-appointment-calendar class="flex-1 flex flex-col min-h-0"></app-appointment-calendar>
   </div>
 </div>
