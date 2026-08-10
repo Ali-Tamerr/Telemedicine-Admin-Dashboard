@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Chart, registerables } from 'chart.js';
+import { Chart, ChartConfiguration } from 'chart.js/auto';
 
 @Component({
   selector: 'app-reports',
@@ -8,23 +8,34 @@ import { Chart, registerables } from 'chart.js';
   templateUrl: './reports.html',
   styleUrl: './reports.css',
 })
-export class Reports implements AfterViewInit {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    Chart.register(...registerables);
-  }
+export class Reports implements AfterViewInit, OnDestroy {
+  @ViewChild('revenueChartCanvas') revenueChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('departmentChartCanvas') departmentChartRef!: ElementRef<HTMLCanvasElement>;
+
+  private revenueChart?: Chart;
+  private departmentChart?: Chart;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.initRevenueChart();
-      this.initDepartmentChart();
+      setTimeout(() => {
+        this.initRevenueChart();
+        this.initDepartmentChart();
+      }, 0);
     }
   }
 
   private initRevenueChart() {
-    const ctx = document.getElementById('revenueChart') as HTMLCanvasElement;
-    if (!ctx) return;
+    if (!this.revenueChartRef) return;
+    const canvas = this.revenueChartRef.nativeElement;
+    if (!canvas) return;
 
-    new Chart(ctx, {
+    if (this.revenueChart) {
+      this.revenueChart.destroy();
+    }
+
+    const config: ChartConfiguration<'line'> = {
       type: 'line',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
@@ -41,39 +52,35 @@ export class Reports implements AfterViewInit {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: {
-            display: false
-          }
+          legend: { display: false }
         },
         scales: {
           y: {
             beginAtZero: true,
-            grid: {
-              display: true,
-              color: 'rgba(148, 163, 184, 0.1)'
-            },
-            ticks: {
-              color: '#94a3b8'
-            }
+            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+            ticks: { color: '#94a3b8' }
           },
           x: {
-            grid: {
-              display: false
-            },
-            ticks: {
-              color: '#94a3b8'
-            }
+            grid: { display: false },
+            ticks: { color: '#94a3b8' }
           }
         }
       }
-    });
+    };
+
+    this.revenueChart = new Chart(canvas, config);
   }
 
   private initDepartmentChart() {
-    const ctx = document.getElementById('departmentChart') as HTMLCanvasElement;
-    if (!ctx) return;
+    if (!this.departmentChartRef) return;
+    const canvas = this.departmentChartRef.nativeElement;
+    if (!canvas) return;
 
-    new Chart(ctx, {
+    if (this.departmentChart) {
+      this.departmentChart.destroy();
+    }
+
+    const config: ChartConfiguration<'doughnut'> = {
       type: 'doughnut',
       data: {
         labels: ['Cardiology', 'Neurology', 'Pediatrics', 'Orthopedics', 'General'],
@@ -92,18 +99,29 @@ export class Reports implements AfterViewInit {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        cutout: '70%',
         plugins: {
           legend: {
             position: 'bottom',
             labels: {
-              padding: 20,
+              padding: 12,
               usePointStyle: true,
               color: '#94a3b8'
             }
           }
-        },
-        cutout: '70%'
+        }
       }
-    });
+    };
+
+    this.departmentChart = new Chart(canvas, config);
+  }
+
+  ngOnDestroy() {
+    if (this.revenueChart) {
+      this.revenueChart.destroy();
+    }
+    if (this.departmentChart) {
+      this.departmentChart.destroy();
+    }
   }
 }
