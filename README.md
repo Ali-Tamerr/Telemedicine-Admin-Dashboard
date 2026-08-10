@@ -29,47 +29,6 @@ MediAdmin is a premium, high-performance administrative dashboard designed for t
 - **Build Tool**: Angular CLI & Vite
 - **Testing**: [Vitest](https://vitest.dev/)
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm (v9 or higher)
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Ali-Tamerr/Telemedicine-Admin-Dashboard.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd Telemedicine-Admin-Dashboard
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Start the development server:
-   ```bash
-   npm start
-   ```
-
-Navigate to `http://localhost:4200` to view the app.
-
-## 📦 Deployment
-
-This project is configured for automated deployment to GitHub Pages.
-
-To build and deploy:
-```bash
-npm run build
-npm run deploy
-```
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
